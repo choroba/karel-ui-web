@@ -1,0 +1,16 @@
+# Your application"s name
+appname: "Karel::UI::Web"
+
+layout: "main"
+
+charset: "UTF-8"
+
+template: "template_toolkit"
+engines:
+  template:
+    template_toolkit:
+      start_tag: "<%"
+      end_tag:   "%>"
+  session:
+    Simple:
+      cookie_name: karel.session

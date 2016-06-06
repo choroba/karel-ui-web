@@ -1,0 +1,30 @@
+<h1>Karel</h1>
+<div id="page">
+    <TABLE BORDER=0><TR><TD BGCOLOR="gray">
+        <TABLE BORDER=1 CLASS="grid">
+        <% FOR row IN grid %>
+            <TR>
+            <% FOR cell IN row %>
+                <TD style="<% cell.1 %>"><% cell.0 %></TD>
+            <% END %>
+            </TR>
+        <% END %>
+        <TR><TD STYLE="<% cover.1 %>"><% cover.0 %>
+        </TABLE>
+    </TD></TABLE>
+
+    <TABLE BORDER=1 CELLSPACING=1 CLASS="grid">
+    </TABLE>
+
+    <FORM>
+        <DIV style="padding-top:2em">
+            <SELECT>
+                <OPTION>left</OPTION>
+            </SELECT>
+        </DIV>
+        <DIV style="padding-top:1em">
+            <INPUT TYPE="BUTTON" VALUE="Step" STYLE="color:brown">
+            <INPUT TYPE="BUTTON" VALUE="Run" STYLE="color:red">
+        </DIV>
+    </FORM>
+</DIV>

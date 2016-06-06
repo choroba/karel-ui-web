@@ -1,0 +1,40 @@
+
+body {
+margin: 0;
+margin-bottom: 25px;
+padding: 10pt 10pt 10pt 10pt;
+background-color: #ddd;
+background-repeat: no-repeat;
+background-position: top left;
+color: #333;
+}
+
+.grid, .grid * {
+font-family: "Source Code Pro", "Mono", "Monaco";
+font-size:26pt;
+}
+
+table td {
+text-align:center;
+}
+
+h1 {
+font-size: 28px;
+color: #000;
+}
+
+a  {color: #03c}
+a:hover {
+background-color: #03c;
+color: white;
+text-decoration: none;
+}
+
+#footer {
+clear: both;
+padding-top: 2em;
+text-align: center;
+padding-right: 160px;
+font-family: sans-serif;
+font-size: 10px;
+}
