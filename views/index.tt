@@ -16,15 +16,25 @@
     <TABLE BORDER=1 CELLSPACING=1 CLASS="grid">
     </TABLE>
 
-    <FORM>
+    <FORM METHOD="post" ACTION="/run">
         <DIV style="padding-top:2em">
-            <SELECT>
-                <OPTION>left</OPTION>
+            <SELECT NAME="command" <% IF running %> DISABLED <% END %>>
+                <% FOR known IN commands %>
+                <!-- <% known %> : <% command %> -->
+                    <OPTION <% IF known == command %>SELECTED<% END %> >
+                        <% known %>
+                    </OPTION>
+                <% END %>
             </SELECT>
         </DIV>
         <DIV style="padding-top:1em">
-            <INPUT TYPE="BUTTON" VALUE="Step" STYLE="color:brown">
-            <INPUT TYPE="BUTTON" VALUE="Run" STYLE="color:red">
+            <% IF running %>
+                <INPUT TYPE="submit" NAME="action" VALUE="Step" STYLE="color:brown">
+                <INPUT TYPE="submit" NAME="action" VALUE="Stop" STYLE="color:red">
+            <% ELSE %>
+                <INPUT TYPE="submit" NAME="action" VALUE="Run" STYLE="color:red">
+            <% END %>
         </DIV>
+        <INPUT TYPE="hidden" NAME="running" VALUE="<% running %>">
     </FORM>
 </DIV>
