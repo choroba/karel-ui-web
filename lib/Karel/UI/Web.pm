@@ -45,8 +45,10 @@ sub draw_grid {
     template 'index', { grid     => \@grid,
                         cover    => nice($robot->grid->at($robot->coords)),
                         running  => $robot->is_running,
-                        commands => [qw[ left forward drop-mark pick-mark ]],
+                        commands => [qw[ left forward drop-mark pick-mark ],
+                                     keys %{ $robot->knowledge // {} } ],
                         command  => body_parameters->get('command'),
+                        fast     => session 'fast',
                       };
 }
 
@@ -65,21 +67,26 @@ sub initialize_robot {
 
 any '/' => sub {
     my $robot = initialize_robot();
-    draw_grid($robot);
-};
-
-
-post '/run' => sub {
-    my $robot = initialize_robot();
     my $action = {
-        Run  => sub { $robot->run(body_parameters->get('command')) },
-        Step => sub { $robot->step },
-        Stop => sub { $robot->stop },
+        Start => sub { $robot->run(body_parameters->get('command')) },
+        Step  => sub { $robot->step },
+        Stop  => sub { session fast => 0; $robot->stop },
+        Run   => sub { session fast => 1; $robot->step },
     }->{ body_parameters->get('action') };
-    $action->();
+    $action->() if $action;
     session robot => $robot;
     draw_grid($robot);
 };
 
+
+post '/upload' => sub {
+    my $file = upload('source');
+    my $FH = $file->file_handle;
+    my $robot = initialize_robot();
+    $FH->input_record_separator(undef);
+    $robot->learn(<$FH>);
+    session robot => $robot;
+    forward '/'
+};
 
 true;

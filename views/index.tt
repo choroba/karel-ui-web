@@ -16,7 +16,7 @@
     <TABLE BORDER=1 CELLSPACING=1 CLASS="grid">
     </TABLE>
 
-    <FORM METHOD="post" ACTION="/run">
+    <FORM METHOD="post" ACTION="/">
         <DIV style="padding-top:2em">
             <SELECT NAME="command" <% IF running %> DISABLED <% END %>>
                 <% FOR known IN commands %>
@@ -29,12 +29,29 @@
         </DIV>
         <DIV style="padding-top:1em">
             <% IF running %>
-                <INPUT TYPE="submit" NAME="action" VALUE="Step" STYLE="color:brown">
-                <INPUT TYPE="submit" NAME="action" VALUE="Stop" STYLE="color:red">
+                <INPUT TYPE="submit" NAME="action" VALUE="Step" STYLE="color:brown" ID="step">
+                <INPUT TYPE="submit" NAME="action" VALUE="Run" STYLE="color:brown">
+                <INPUT TYPE="submit" NAME="action" VALUE="Stop" STYLE="color:red" ONCLICK="window.clearTimeout(timeoutID);">
             <% ELSE %>
-                <INPUT TYPE="submit" NAME="action" VALUE="Run" STYLE="color:red">
+                <INPUT TYPE="submit" NAME="action" VALUE="Start" STYLE="color:red">
             <% END %>
         </DIV>
-        <INPUT TYPE="hidden" NAME="running" VALUE="<% running %>">
+        <INPUT TYPE="hidden" NAME="fast" VALUE="fast">
     </FORM>
+
+
+    <% UNLESS running %>
+    <FORM METHOD="post" ACTION="/upload" enctype="multipart/form-data">
+        <DIV>
+            Select source file: <INPUT TYPE="file" NAME="source">
+            Learn commands: <INPUT TYPE="submit" NAME="action" VALUE="Learn">
+        </DIV>
+    </FORM>
+    <% END %>
+
 </DIV>
+<% IF fast %>
+<SCRIPT TYPE="text/javascript">
+timeoutID = window.setTimeout(function () { $('#step').click(); }, 400);
+</SCRIPT>
+<% END %>
