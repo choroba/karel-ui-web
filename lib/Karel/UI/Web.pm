@@ -68,7 +68,7 @@ sub initialize_robot {
 any '/' => sub {
     my $robot = initialize_robot();
     my $action = {
-        Start => sub { $robot->run(body_parameters->get('command')) },
+        Start => sub { session fast => 0; $robot->run(body_parameters->get('command')) },
         Step  => sub { $robot->step },
         Stop  => sub { session fast => 0; $robot->stop },
         Run   => sub { session fast => 1; $robot->step },
