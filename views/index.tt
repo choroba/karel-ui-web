@@ -36,22 +36,20 @@
                 <INPUT TYPE="submit" NAME="action" VALUE="Start" STYLE="color:red">
             <% END %>
         </DIV>
-        <INPUT TYPE="hidden" NAME="fast" VALUE="fast">
     </FORM>
 
 
     <% UNLESS running %>
-    <FORM METHOD="post" ACTION="/upload" enctype="multipart/form-data">
+    <FORM METHOD="post" ACTION="/upload" enctype="multipart/form-data" ID="f2">
         <DIV>
             Select source file: <INPUT TYPE="file" NAME="source">
-            Learn commands: <INPUT TYPE="submit" NAME="action" VALUE="Learn">
         </DIV>
     </FORM>
     <% END %>
 
 </DIV>
-<% IF fast %>
 <SCRIPT TYPE="text/javascript">
+ <% IF fast %>
 timeoutID = window.setTimeout(function () { $('#step').click(); }, 400);
+ <% END %>
 </SCRIPT>
-<% END %>

@@ -73,8 +73,10 @@ any '/' => sub {
         Stop  => sub { session fast => 0; $robot->stop },
         Run   => sub { session fast => 1; $robot->step },
     }->{ body_parameters->get('action') };
-    $action->() if $action;
-    session robot => $robot;
+    if ($action) {
+        $action->();
+        session robot => $robot;
+    }
     draw_grid($robot);
 };
 
