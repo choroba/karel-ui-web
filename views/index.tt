@@ -2,14 +2,14 @@
 <div id="page">
     <TABLE BORDER=0><TR><TD BGCOLOR="gray">
         <TABLE BORDER=1 CLASS="grid">
-        <% FOR row IN grid %>
+        <%~ FOR row IN grid ~%>
             <TR>
-            <% FOR cell IN row %>
-                <TD style="<% cell.1 %>"><% cell.0 %></TD>
-            <% END %>
+            <%~ FOR cell IN row ~%>
+                <TD CLASS="<% cell.1 %>"><% cell.0 %></TD>
+            <%~ END %>
             </TR>
-        <% END %>
-        <TR><TD STYLE="<% cover.1 %>"><% cover.0 %>
+        <%~ END %>
+        <TR><TD CLASS="<% cover.1 %>"><% cover.0 %>
         </TABLE>
     </TD></TABLE>
 
@@ -17,39 +17,38 @@
     </TABLE>
 
     <FORM METHOD="post" ACTION="/">
-        <DIV style="padding-top:2em">
+        <DIV STYLE="padding-top:2em">
             <SELECT NAME="command" <% IF running %> DISABLED <% END %>>
-                <% FOR known IN commands %>
-                <!-- <% known %> : <% command %> -->
-                    <OPTION <% IF known == command %>SELECTED<% END %> >
-                        <% known %>
+                <%~ FOR known IN commands ~%>
+                    <OPTION<% IF known == command %>SELECTED<% END %>>
+                        <%~ known ~%>
                     </OPTION>
-                <% END %>
+                <% END ~%>
             </SELECT>
         </DIV>
-        <DIV style="padding-top:1em">
-            <% IF running %>
+        <INPUT TYPE="hidden" NAME="last_command" VALUE="<% command %>">
+        <DIV STYLE="padding-top:1em">
+            <%~ IF running ~%>
                 <INPUT TYPE="submit" NAME="action" VALUE="Step" STYLE="color:brown" ID="step">
                 <INPUT TYPE="submit" NAME="action" VALUE="Run" STYLE="color:brown">
                 <INPUT TYPE="submit" NAME="action" VALUE="Stop" STYLE="color:red" ONCLICK="window.clearTimeout(timeoutID);">
-            <% ELSE %>
+            <%~ ELSE ~%>
                 <INPUT TYPE="submit" NAME="action" VALUE="Start" STYLE="color:red">
-            <% END %>
+            <%~ END ~%>
         </DIV>
     </FORM>
 
-
-    <% UNLESS running %>
+    <%~ UNLESS running ~%>
     <FORM METHOD="post" ACTION="/upload" enctype="multipart/form-data" ID="f2">
         <DIV>
             Select source file: <INPUT TYPE="file" NAME="source">
         </DIV>
     </FORM>
-    <% END %>
+    <%~ END ~%>
 
 </DIV>
 <SCRIPT TYPE="text/javascript">
- <% IF fast %>
-timeoutID = window.setTimeout(function () { $('#step').click(); }, 400);
- <% END %>
+    <%~ IF fast ~%>
+    timeoutID = window.setTimeout(function () { $('#step').click(); }, 100);
+    <%~ END ~%>
 </SCRIPT>

@@ -4,18 +4,40 @@ margin: 0;
 margin-bottom: 25px;
 padding: 10pt 10pt 10pt 10pt;
 background-color: #ddd;
-background-repeat: no-repeat;
-background-position: top left;
 color: #333;
+}
+
+table td {
+text-align:center;
+}
+
+td.thickwall {
+color:black;
+background:red;
+}
+
+td.thinwall {
+color:white;
+background:brown;
+}
+
+td.empty {
+background:white;
+}
+
+td.mark {
+color:purple;
+background:white;
+}
+
+td.robot {
+color: blue;
+background: white;
 }
 
 .grid, .grid * {
 font-family: "Source Code Pro", "Mono", "Monaco";
 font-size:26pt;
-}
-
-table td {
-text-align:center;
 }
 
 h1 {

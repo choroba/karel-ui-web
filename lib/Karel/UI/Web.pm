@@ -18,10 +18,10 @@ our $VERSION = '0.1';
 
 
 sub nice {
-    +{ 'W' => [ '┳┻', 'color:black; background:red' ],
-       'w' => [ '┴┬', 'color:white; background:brown' ],
-       ' ' => [ ' ', 'background:white' ],
-       map { $_ => [ chr $_ + 10101, 'color:purple; background:white' ] }
+    +{ 'W' => [ '┳┻', 'thickwall' ],
+       'w' => [ '┴┬', 'thinwall' ],
+       ' ' => [ ' ', 'empty' ],
+       map { $_ => [ chr $_ + 10101, 'mark' ] }
            1 .. 9,
    }->{ +shift }
 }
@@ -40,14 +40,14 @@ sub draw_grid {
                                       W => '⬅',
                                       E => '➡'
                                     }->{ $robot->direction },
-                                  'color: blue; background: white' ];
+                                  'robot' ];
 
     template 'index', { grid     => \@grid,
                         cover    => nice($robot->grid->at($robot->coords)),
                         running  => $robot->is_running,
                         commands => [qw[ left forward drop-mark pick-mark ],
                                      keys %{ $robot->knowledge // {} } ],
-                        command  => body_parameters->get('command'),
+                        command  => body_parameters->get('command') || body_parameters->get('last_command'),
                         fast     => session 'fast',
                       };
 }
@@ -68,7 +68,7 @@ sub initialize_robot {
 any '/' => sub {
     my $robot = initialize_robot();
     my $action = {
-        Start => sub { session fast => 0; $robot->run(body_parameters->get('command')) },
+        Start => sub { session fast => 0; $robot->run(body_parameters->get('command') || body_parameters->get('last_command')) },
         Step  => sub { $robot->step },
         Stop  => sub { session fast => 0; $robot->stop },
         Run   => sub { session fast => 1; $robot->step },
