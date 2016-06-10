@@ -28,7 +28,7 @@ sub nice {
 
 
 sub draw_grid {
-    my $robot = shift;
+    my ($robot) = @_;
     my @grid;
     for my $x (0 .. $robot->grid->x + 1) {
         for my $y ( 0 .. $robot->grid->y + 1) {
@@ -68,7 +68,7 @@ sub initialize_robot {
 any '/' => sub {
     my $robot = initialize_robot();
     my $action = {
-        Start => sub { session fast => 0; $robot->run(body_parameters->get('command') || body_parameters->get('last_command')) },
+        Start => sub { session fast => 0; $robot->run(body_parameters->get('command')) },
         Step  => sub { $robot->step },
         Stop  => sub { session fast => 0; $robot->stop },
         Run   => sub { session fast => 1; $robot->step },

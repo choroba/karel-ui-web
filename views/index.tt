@@ -20,7 +20,7 @@
         <DIV STYLE="padding-top:2em">
             <SELECT NAME="command" <% IF running %> DISABLED <% END %>>
                 <%~ FOR known IN commands ~%>
-                    <OPTION<% IF known == command %>SELECTED<% END %>>
+                    <OPTION<% IF known == command %> SELECTED<% END %>>
                         <%~ known ~%>
                     </OPTION>
                 <% END ~%>
