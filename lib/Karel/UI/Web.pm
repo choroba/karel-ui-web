@@ -72,6 +72,7 @@ any '/' => sub {
         Step  => sub { $robot->step },
         Stop  => sub { session fast => 0; $robot->stop },
         Run   => sub { session fast => 1; $robot->step },
+        Learn => sub { $robot->learn(body_parameters->get('editor')) },
     }->{ body_parameters->get('action') };
     if ($action) {
         $action->();

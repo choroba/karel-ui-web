@@ -1,6 +1,6 @@
-<h1>Karel</h1>
+<h1 id="title">Karel</h1>
 <div id="page">
-    <TABLE BORDER=0><TR><TD BGCOLOR="gray">
+    <TABLE BORDER=0 ID="grid"><TR><TD BGCOLOR="gray">
         <TABLE BORDER=1 CLASS="grid">
         <%~ FOR row IN grid ~%>
             <TR>
@@ -34,8 +34,16 @@
                 <INPUT TYPE="submit" NAME="action" VALUE="Stop" STYLE="color:red" ONCLICK="window.clearTimeout(timeoutID);">
             <%~ ELSE ~%>
                 <INPUT TYPE="submit" NAME="action" VALUE="Start" STYLE="color:red">
+                <DIV ID="editor_div">
+                    <TEXTAREA ROWS="30" COLS="40" NAME="editor" STYLE="position:relative; left:2em; top:1em">command
+
+end</TEXTAREA>
+                    <INPUT TYPE="submit" NAME="action" VALUE="Learn" STYLE="color:brown; position:relative; left:2em">
+                </DIV>
             <%~ END ~%>
         </DIV>
+
+
     </FORM>
 
     <%~ UNLESS running ~%>
@@ -48,6 +56,7 @@
 
 </DIV>
 <SCRIPT TYPE="text/javascript">
+ $('#editor_div').offset({'top':$('#title').outerHeight(true), left: $('#grid').outerWidth(true)});
     <%~ IF fast ~%>
     timeoutID = window.setTimeout(function () { $('#step').click(); }, 100);
     <%~ END ~%>
