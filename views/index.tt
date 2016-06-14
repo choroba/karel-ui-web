@@ -35,15 +35,15 @@
             <%~ ELSE ~%>
                 <INPUT TYPE="submit" NAME="action" VALUE="Start" STYLE="color:red">
                 <DIV ID="editor_div">
-                    <TEXTAREA ROWS="30" COLS="40" NAME="editor" STYLE="position:relative; left:2em; top:1em">command
+                    <DIV STYLE="position:absolute; left:2em; top:1em">
+                        <TEXTAREA ROWS="30" COLS="40" NAME="editor">command
 
 end</TEXTAREA>
-                    <INPUT TYPE="submit" NAME="action" VALUE="Learn" STYLE="color:brown; position:relative; left:2em">
+                    <INPUT TYPE="submit" NAME="action" VALUE="Learn" STYLE="color:brown;" ID="learn">
+                    </DIV>
                 </DIV>
             <%~ END ~%>
         </DIV>
-
-
     </FORM>
 
     <%~ UNLESS running ~%>
@@ -56,7 +56,8 @@ end</TEXTAREA>
 
 </DIV>
 <SCRIPT TYPE="text/javascript">
- $('#editor_div').offset({'top':$('#title').outerHeight(true), left: $('#grid').outerWidth(true)});
+ $('#editor_div').offset({top: $('#title').outerHeight(true),
+                          left: $('#grid').outerWidth(true)});
     <%~ IF fast ~%>
     timeoutID = window.setTimeout(function () { $('#step').click(); }, 100);
     <%~ END ~%>
