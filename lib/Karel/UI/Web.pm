@@ -56,9 +56,13 @@ sub draw_grid {
 sub initialize_robot {
     my $robot = session('robot') || 'Karel::Robot'->new;
     unless ($robot->can('grid')) {
-        my $grid  = 'Karel::Grid'->new( x => 10, y => 10 );
-        $grid->build_wall(3, 3);
-        $grid->drop_mark(4, 5);
+        my $grid  = 'Karel::Grid'->new( x => 9, y => 9 );
+        $grid->build_wall(@$_) for [2, 2], [8, 2], [2, 8], [8, 8];
+        my @marks = ( [4, 4], [5, 4], [6, 4],
+                      [4, 5], [5, 5], [6, 5],
+                      [4, 6], [5, 6], [6, 6],
+                     );
+        do { $grid->drop_mark(@$_) for @marks } while shift @marks;
         $robot->set_grid($grid, 5, 1, 'S');
     }
     return $robot
