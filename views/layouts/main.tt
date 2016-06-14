@@ -17,6 +17,6 @@
 <div id="footer">
 Powered by <a href="http://perldancer.org/">Dancer2</a> <% dancer_version %>
 </div>
-<script src="javascripts/index.js"></script>
+<script type="text/javascript" src="/javascripts/index.js"></script>
 </body>
 </html>

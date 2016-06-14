@@ -52,8 +52,13 @@ end</TEXTAREA>
             Select source file: <INPUT TYPE="file" NAME="source" ONCHANGE="$('#f2').submit();">
         </DIV>
     </FORM>
-    <%~ END ~%>
 
+    <FORM METHOD="post" ACTION="/new_grid" enctype="multipart/form-data" ID="f3">
+        <DIV>
+            Upload a new grid: <INPUT TYPE="file" NAME="gridfile" ONCHANGE="$('#f3').submit();">
+        </DIV>
+    </FORM>
+    <%~ END ~%>
 </DIV>
 <SCRIPT TYPE="text/javascript">
  $('#editor_div').offset({top: $('#title').outerHeight(true),

@@ -90,8 +90,16 @@ post '/upload' => sub {
     my $file = upload('source');
     my $FH = $file->file_handle;
     my $robot = initialize_robot();
-    $FH->input_record_separator(undef);
-    $robot->learn(<$FH>);
+    $robot->learn(do { local $/; <$FH> });
+    session robot => $robot;
+    forward '/'
+};
+
+
+post '/new_grid' => sub {
+    my $file = upload('gridfile');
+    my $robot = initialize_robot();
+    $robot->load_grid(handle => $file->file_handle);
     session robot => $robot;
     forward '/'
 };
