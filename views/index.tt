@@ -49,7 +49,7 @@ end</TEXTAREA>
     <%~ UNLESS running ~%>
     <FORM METHOD="post" ACTION="/upload" enctype="multipart/form-data" ID="f2">
         <DIV>
-            Select source file: <INPUT TYPE="file" NAME="source">
+            Select source file: <INPUT TYPE="file" NAME="source" ONCHANGE="$('#f2').submit();">
         </DIV>
     </FORM>
     <%~ END ~%>
